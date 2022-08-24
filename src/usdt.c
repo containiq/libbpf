@@ -1244,8 +1244,10 @@ static int parse_usdt_arg(const char *arg_str, int arg_num, struct usdt_arg_spec
 		arg->val_off = 0;
 		reg_off = calc_pt_regs_off(reg_name);
 		free(reg_name);
-		if (reg_off < 0)
+		if (reg_off < 0){
+			pr_warn("usdt: reg_off less than zero arg #%d spec '%s'\n", arg_num, arg_str);
 			return reg_off;
+		}
 		arg->reg_off = reg_off;
     } else if (sscanf(arg_str, " %d @ %%%ms %n", &arg_sz, &reg_name, &len) == 2) {
 		/* Register read case, e.g., -4@%eax */
