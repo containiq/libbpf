@@ -1148,6 +1148,7 @@ typedef void (*perf_buffer_lost_fn)(void *ctx, int cpu, __u64 cnt);
 
 /* common use perf buffer options */
 struct perf_buffer_opts {
+	int wakeup_events;
 	size_t sz;
 };
 #define perf_buffer_opts__last_field sz
